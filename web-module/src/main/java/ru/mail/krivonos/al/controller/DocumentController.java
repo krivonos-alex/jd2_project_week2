@@ -1,6 +1,6 @@
 package ru.mail.krivonos.al.controller;
 
-import ru.mail.krivonos.al.services.model.DocumentDTO;
+import ru.mail.krivonos.al.service.model.DocumentDTO;
 
 public interface DocumentController {
 

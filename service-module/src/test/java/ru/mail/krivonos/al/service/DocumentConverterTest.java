@@ -1,28 +1,28 @@
-package ru.mail.krivonos.al.services;
+package ru.mail.krivonos.al.service;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.mockito.runners.MockitoJUnitRunner;
 import ru.mail.krivonos.al.repository.model.Document;
-import ru.mail.krivonos.al.services.config.ServicesConfig;
-import ru.mail.krivonos.al.services.converter.DocumentConverter;
-import ru.mail.krivonos.al.services.model.DocumentDTO;
+import ru.mail.krivonos.al.service.converter.DocumentConverter;
+import ru.mail.krivonos.al.service.converter.DocumentConverterImpl;
+import ru.mail.krivonos.al.service.model.DocumentDTO;
 
 import java.util.UUID;
 
-@ActiveProfiles("documentConverter-test")
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {ServicesConfig.class, DocumentConverterTestConfig.class})
+
+@RunWith(MockitoJUnitRunner.class)
 public class DocumentConverterTest {
 
-    @Autowired
-    @Qualifier("documentConverter")
+
     private DocumentConverter documentConverter;
+
+    @Before
+    public void init() {
+        documentConverter = new DocumentConverterImpl();
+    }
 
     @Test
     public void shouldReturnDocumentWithSameUniqueNumberInFromDTOMethod() {

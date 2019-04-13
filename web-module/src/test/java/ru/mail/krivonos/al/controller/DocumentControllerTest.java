@@ -1,33 +1,39 @@
 package ru.mail.krivonos.al.controller;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import ru.mail.krivonos.al.controller.config.ControllerConfig;
-import ru.mail.krivonos.al.controller.exceptions.*;
-import ru.mail.krivonos.al.services.DocumentService;
-import ru.mail.krivonos.al.services.model.DocumentDTO;
+import org.mockito.runners.MockitoJUnitRunner;
+import ru.mail.krivonos.al.controller.exceptions.IllegalDescriptionLengthException;
+import ru.mail.krivonos.al.controller.exceptions.IllegalUniqueNumberFormatException;
+import ru.mail.krivonos.al.controller.exceptions.NullArgumentDocumentDTOException;
+import ru.mail.krivonos.al.controller.exceptions.NullDocumentDTODescriptionException;
+import ru.mail.krivonos.al.controller.exceptions.NullDocumentDTOIDException;
+import ru.mail.krivonos.al.controller.exceptions.NullIDArgumentException;
+import ru.mail.krivonos.al.controller.exceptions.NullReturningDocumentDTOException;
+import ru.mail.krivonos.al.controller.impl.DocumentControllerImpl;
+import ru.mail.krivonos.al.service.DocumentService;
+import ru.mail.krivonos.al.service.model.DocumentDTO;
 
 import java.util.UUID;
 
-@ActiveProfiles("controller-test")
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {DocumentControllerTestConfig.class, ControllerConfig.class})
+
+@RunWith(MockitoJUnitRunner.class)
 public class DocumentControllerTest {
 
-    @Autowired
-    @Qualifier("documentController")
+
     private DocumentController documentController;
 
-    @Autowired
-    @Qualifier("documentService")
+    @Mock
     private DocumentService documentService;
+
+    @Before
+    public void init() {
+        documentController = new DocumentControllerImpl(documentService);
+    }
 
     @Test
     public void shouldReturnDocumentDTOWithIDAfterAdd() {

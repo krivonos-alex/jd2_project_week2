@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration status="INFO">
+<configuration status="DEBUG">
     <appenders>
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
 
         <RollingFile
-                name="rollingFile"
+                name="File"
                 fileName="logs/application.log"
                 filePattern="logs/application.%d{dd-MMM}.log.zip"
                 ignoreExceptions="false">
@@ -19,9 +19,9 @@
     </appenders>
 
     <loggers>
-        <root level="info">
-            <appender-ref ref="Console" level="info"/>
-            <appender-ref ref="File" level="info"/>
+        <root level="debug">
+            <appender-ref ref="Console" level="debug"/>
+            <appender-ref ref="File" level="debug"/>
         </root>
     </loggers>
 </configuration>

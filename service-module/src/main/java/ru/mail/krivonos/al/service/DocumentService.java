@@ -1,6 +1,6 @@
-package ru.mail.krivonos.al.services;
+package ru.mail.krivonos.al.service;
 
-import ru.mail.krivonos.al.services.model.DocumentDTO;
+import ru.mail.krivonos.al.service.model.DocumentDTO;
 
 public interface DocumentService {
 

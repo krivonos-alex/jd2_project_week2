@@ -1,4 +1,4 @@
-package ru.mail.krivonos.al.services.model;
+package ru.mail.krivonos.al.service.model;
 
 public class DocumentDTO {
 

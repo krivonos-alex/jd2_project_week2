@@ -1,7 +1,7 @@
-package ru.mail.krivonos.al.services.converter;
+package ru.mail.krivonos.al.service.converter;
 
 import ru.mail.krivonos.al.repository.model.Document;
-import ru.mail.krivonos.al.services.model.DocumentDTO;
+import ru.mail.krivonos.al.service.model.DocumentDTO;
 
 public interface DocumentConverter {
 

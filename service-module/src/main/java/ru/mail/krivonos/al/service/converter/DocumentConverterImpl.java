@@ -1,8 +1,8 @@
-package ru.mail.krivonos.al.services.converter;
+package ru.mail.krivonos.al.service.converter;
 
 import org.springframework.stereotype.Component;
 import ru.mail.krivonos.al.repository.model.Document;
-import ru.mail.krivonos.al.services.model.DocumentDTO;
+import ru.mail.krivonos.al.service.model.DocumentDTO;
 
 @Component("documentConverter")
 public class DocumentConverterImpl implements DocumentConverter {

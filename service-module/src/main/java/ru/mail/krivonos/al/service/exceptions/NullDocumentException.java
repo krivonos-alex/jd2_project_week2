@@ -1,4 +1,4 @@
-package ru.mail.krivonos.al.services.exceptions;
+package ru.mail.krivonos.al.service.exceptions;
 
 public class NullDocumentException extends RuntimeException {
 

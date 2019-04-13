@@ -1,14 +1,16 @@
-package ru.mail.krivonos.al.services.impl;
+package ru.mail.krivonos.al.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.mail.krivonos.al.repository.DocumentRepository;
 import ru.mail.krivonos.al.repository.model.Document;
-import ru.mail.krivonos.al.services.DocumentService;
-import ru.mail.krivonos.al.services.converter.DocumentConverter;
-import ru.mail.krivonos.al.services.exceptions.NullDocumentException;
-import ru.mail.krivonos.al.services.model.DocumentDTO;
+import ru.mail.krivonos.al.service.DocumentService;
+import ru.mail.krivonos.al.service.constants.ServiceErrorMessageConstants;
+import ru.mail.krivonos.al.service.converter.DocumentConverter;
+import ru.mail.krivonos.al.service.exceptions.DocumentNotFoundException;
+import ru.mail.krivonos.al.service.exceptions.NullDocumentException;
+import ru.mail.krivonos.al.service.model.DocumentDTO;
 
 @Service("documentService")
 public class DocumentServiceImpl implements DocumentService {
@@ -30,14 +32,14 @@ public class DocumentServiceImpl implements DocumentService {
     public DocumentDTO add(DocumentDTO documentDTO) {
         Document convertedDocument = documentConverter.fromDTO(documentDTO);
         Document returnedDocument = documentRepository.add(convertedDocument);
-        checkDocumentForNull(returnedDocument);
+        checkDocumentForNulls(returnedDocument);
         return documentConverter.toDTO(returnedDocument);
     }
 
     @Override
     public DocumentDTO getDocumentById(Long id) {
         Document document = documentRepository.findDocumentByID(id);
-        checkDocumentForNull(document);
+        checkDocumentForNulls(document);
         return documentConverter.toDTO(document);
     }
 
@@ -46,9 +48,12 @@ public class DocumentServiceImpl implements DocumentService {
         documentRepository.delete(id);
     }
 
-    private void checkDocumentForNull(Document document) {
+    private void checkDocumentForNulls(Document document) {
         if (document == null) {
-            throw new NullDocumentException("Received Document is null.");
+            throw new NullDocumentException(ServiceErrorMessageConstants.NULL_DOCUMENT_ERROR_MESSAGE);
+        }
+        if (document.getId() == null) {
+            throw new DocumentNotFoundException(ServiceErrorMessageConstants.DOCUMENT_NOT_FOUND_ERROR_MESSAGE);
         }
     }
 }

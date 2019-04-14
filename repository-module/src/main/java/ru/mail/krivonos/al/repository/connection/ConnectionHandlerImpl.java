@@ -13,6 +13,7 @@ import ru.mail.krivonos.al.repository.exceptions.StatementExecutionException;
 import ru.mail.krivonos.al.repository.properties.DatabaseProperties;
 
 import javax.annotation.PostConstruct;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -57,7 +58,7 @@ public class ConnectionHandlerImpl implements ConnectionHandler {
 
     @PostConstruct
     public void initializeDatabase() {
-        String initialFileName = getClass().getResource("/" + databaseProperties.getDatabaseInitialFile()).getPath();
+        String initialFileName = getClass().getResource(File.separator + databaseProperties.getDatabaseInitialFile()).getPath();
         String[] databaseInitialQueries = getQueries(initialFileName);
         try (Connection connection = getConnection()) {
             connection.setAutoCommit(false);

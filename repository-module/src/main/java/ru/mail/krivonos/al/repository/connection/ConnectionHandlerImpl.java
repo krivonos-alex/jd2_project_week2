@@ -58,7 +58,7 @@ public class ConnectionHandlerImpl implements ConnectionHandler {
 
     @PostConstruct
     public void initializeDatabase() {
-        String initialFileName = getClass().getResource(File.separator + databaseProperties.getDatabaseInitialFile()).getPath();
+        String initialFileName = getClass().getResource("/" + databaseProperties.getDatabaseInitialFile()).getPath();
         String[] databaseInitialQueries = getQueries(initialFileName);
         try (Connection connection = getConnection()) {
             connection.setAutoCommit(false);

@@ -2,6 +2,9 @@ package ru.mail.krivonos.al.controller.constants;
 
 public class ControllerErrorMessageConstants {
 
+    private ControllerErrorMessageConstants() {
+    }
+
     public static final String NULL_ID_ERROR_MESSAGE = "ID argument is null.";
 
     public static final String NULL_RETURNING_ERROR_MESSAGE = "Service returned null value.";

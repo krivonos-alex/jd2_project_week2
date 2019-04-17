@@ -2,6 +2,9 @@ package ru.mail.krivonos.al.repository.constants;
 
 public class RepositoryErrorMessageConstants {
 
+    private RepositoryErrorMessageConstants() {
+    }
+
     public static final String QUERY_EXCEPTION_ERROR_MESSAGE = "Can't execute query: \"%s\"";
 
     public static final String INITIALISING_QUERY_EXCEPTION_ERROR_MESSAGE = "Something goes wrong while executing " +

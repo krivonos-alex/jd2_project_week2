@@ -17,7 +17,6 @@ public class DatabaseProperties {
     @Value("${database.initial-file}")
     private String databaseInitialFile;
 
-
     public String getDatabaseDriverName() {
         return databaseDriverName;
     }

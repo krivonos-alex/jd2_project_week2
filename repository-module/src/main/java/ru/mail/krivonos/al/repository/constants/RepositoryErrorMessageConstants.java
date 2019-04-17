@@ -2,7 +2,10 @@ package ru.mail.krivonos.al.repository.constants;
 
 public class RepositoryErrorMessageConstants {
 
-    public static final String STATEMENT_EXECUTION_ERROR_MESSAGE = "Can't execute statement. ";
+    public static final String QUERY_EXCEPTION_ERROR_MESSAGE = "Can't execute query: \"%s\"";
+
+    public static final String INITIALISING_QUERY_EXCEPTION_ERROR_MESSAGE = "Something goes wrong while executing " +
+            "query for database initialisation.";
 
     public static final String DATABASE_CONNECTION_ERROR_MESSAGE = "Can't create connection to database.";
 

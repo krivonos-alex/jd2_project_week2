@@ -1,19 +1,18 @@
-package ru.mail.krivonos.al.repository.connection;
+package ru.mail.krivonos.al.repository.connection.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import ru.mail.krivonos.al.repository.constants.RepositoryErrorMessageConstants;
+import ru.mail.krivonos.al.repository.connection.ConnectionHandler;
 import ru.mail.krivonos.al.repository.exceptions.DatabaseConnectionException;
 import ru.mail.krivonos.al.repository.exceptions.DatabaseDriverException;
 import ru.mail.krivonos.al.repository.exceptions.DatabaseInitialFileReadingException;
-import ru.mail.krivonos.al.repository.exceptions.StatementExecutionException;
+import ru.mail.krivonos.al.repository.exceptions.DatabaseIntialisingQueryException;
 import ru.mail.krivonos.al.repository.properties.DatabaseProperties;
 
 import javax.annotation.PostConstruct;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -23,6 +22,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 import java.util.stream.Stream;
+
+import static ru.mail.krivonos.al.repository.constants.RepositoryErrorMessageConstants.*;
 
 @Component("connectionHandler")
 public class ConnectionHandlerImpl implements ConnectionHandler {
@@ -38,7 +39,7 @@ public class ConnectionHandlerImpl implements ConnectionHandler {
             Class.forName(databaseProperties.getDatabaseDriverName());
         } catch (ClassNotFoundException e) {
             logger.error(e.getMessage(), e);
-            throw new DatabaseDriverException(RepositoryErrorMessageConstants.DATABASE_DRIVER_ERROR_MESSAGE, e);
+            throw new DatabaseDriverException(DATABASE_DRIVER_ERROR_MESSAGE, e);
         }
     }
 
@@ -52,7 +53,7 @@ public class ConnectionHandlerImpl implements ConnectionHandler {
             return DriverManager.getConnection(databaseProperties.getDatabaseURL(), properties);
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
-            throw new DatabaseConnectionException(RepositoryErrorMessageConstants.DATABASE_CONNECTION_ERROR_MESSAGE, e);
+            throw new DatabaseConnectionException(DATABASE_CONNECTION_ERROR_MESSAGE, e);
         }
     }
 
@@ -70,11 +71,12 @@ public class ConnectionHandlerImpl implements ConnectionHandler {
                 connection.commit();
             } catch (Exception e) {
                 connection.rollback();
-                throw new StatementExecutionException(RepositoryErrorMessageConstants.STATEMENT_EXECUTION_ERROR_MESSAGE, e);
+                logger.error(e.getMessage(), e);
+                throw new DatabaseIntialisingQueryException(INITIALISING_QUERY_EXCEPTION_ERROR_MESSAGE, e);
             }
         } catch (SQLException e) {
             logger.error(e.getMessage(), e);
-            throw new DatabaseConnectionException(RepositoryErrorMessageConstants.DATABASE_CONNECTION_ERROR_MESSAGE, e);
+            throw new DatabaseConnectionException(DATABASE_CONNECTION_ERROR_MESSAGE, e);
         }
     }
 
@@ -83,7 +85,7 @@ public class ConnectionHandlerImpl implements ConnectionHandler {
             return fileStream.reduce(String::concat).orElse("").split(";");
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
-            throw new DatabaseInitialFileReadingException(RepositoryErrorMessageConstants.INITIAL_FILE_ERROR_MESSAGE, e);
+            throw new DatabaseInitialFileReadingException(INITIAL_FILE_ERROR_MESSAGE, e);
         }
     }
 }

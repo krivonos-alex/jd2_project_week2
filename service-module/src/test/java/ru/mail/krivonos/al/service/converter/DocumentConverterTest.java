@@ -1,4 +1,4 @@
-package ru.mail.krivonos.al.service;
+package ru.mail.krivonos.al.service.converter;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -6,8 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 import ru.mail.krivonos.al.repository.model.Document;
-import ru.mail.krivonos.al.service.converter.DocumentConverter;
-import ru.mail.krivonos.al.service.converter.DocumentConverterImpl;
+import ru.mail.krivonos.al.service.converter.impl.DocumentConverterImpl;
 import ru.mail.krivonos.al.service.model.DocumentDTO;
 
 import java.util.UUID;
@@ -15,7 +14,6 @@ import java.util.UUID;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DocumentConverterTest {
-
 
     private DocumentConverter documentConverter;
 

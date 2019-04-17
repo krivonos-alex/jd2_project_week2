@@ -11,7 +11,7 @@ import ru.mail.krivonos.al.repository.DocumentRepository;
 import ru.mail.krivonos.al.repository.model.Document;
 import ru.mail.krivonos.al.service.converter.DocumentConverter;
 import ru.mail.krivonos.al.service.exceptions.DocumentNotFoundException;
-import ru.mail.krivonos.al.service.exceptions.NullDocumentException;
+import ru.mail.krivonos.al.service.exceptions.IllegalDocumentStateException;
 import ru.mail.krivonos.al.service.impl.DocumentServiceImpl;
 import ru.mail.krivonos.al.service.model.DocumentDTO;
 
@@ -46,8 +46,8 @@ public class DocumentServiceTest {
     }
 
 
-    @Test(expected = NullDocumentException.class)
-    public void shouldThrowNullDocumentExceptionIfDocumentRepositoryReturnsNullInAddMethod() {
+    @Test(expected = IllegalDocumentStateException.class)
+    public void shouldThrowIllegalDocumentStateExceptionIfDocumentRepositoryReturnsNullInAddMethod() {
         DocumentDTO documentDTO = new DocumentDTO();
         Document returningDocument = new Document();
         Mockito.when(documentConverter.fromDTO(documentDTO)).thenReturn(returningDocument);
@@ -56,8 +56,8 @@ public class DocumentServiceTest {
         documentService.add(documentDTO);
     }
 
-    @Test(expected = NullDocumentException.class)
-    public void shouldThrowNullDocumentExceptionIfDocumentRepositoryReturnsNullInGetDocumentByIDMethod() {
+    @Test(expected = IllegalDocumentStateException.class)
+    public void shouldThrowIllegalDocumentStateExceptionIfDocumentRepositoryReturnsNullInGetDocumentByIDMethod() {
         DocumentDTO documentDTO = new DocumentDTO();
         Document returningDocument = new Document();
         Mockito.when(documentRepository.findDocumentByID(1L)).thenReturn(null);

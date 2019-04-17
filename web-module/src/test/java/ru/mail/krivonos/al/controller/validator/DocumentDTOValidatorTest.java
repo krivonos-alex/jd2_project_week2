@@ -5,12 +5,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 import ru.mail.krivonos.al.controller.exceptions.IllegalDescriptionLengthException;
-import ru.mail.krivonos.al.controller.exceptions.IllegalUniqueNumberFormatException;
-import ru.mail.krivonos.al.controller.exceptions.IllegalDocumentDTOStateException;
 import ru.mail.krivonos.al.controller.exceptions.IllegalDocumentDTODescriptionException;
 import ru.mail.krivonos.al.controller.exceptions.IllegalDocumentDTOIDException;
+import ru.mail.krivonos.al.controller.exceptions.IllegalDocumentDTOStateException;
 import ru.mail.krivonos.al.controller.exceptions.IllegalIDException;
 import ru.mail.krivonos.al.controller.exceptions.IllegalReturningDocumentDTOException;
+import ru.mail.krivonos.al.controller.exceptions.IllegalUniqueNumberFormatException;
 import ru.mail.krivonos.al.controller.validator.impl.DocumentDTOValidatorImpl;
 import ru.mail.krivonos.al.service.model.DocumentDTO;
 

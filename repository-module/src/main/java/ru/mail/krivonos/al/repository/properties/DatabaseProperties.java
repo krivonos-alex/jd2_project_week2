@@ -14,7 +14,7 @@ public class DatabaseProperties {
     private String databaseUsername;
     @Value("${database.password:}")
     private String databasePassword;
-    @Value("${database.initial-file}")
+    @Value("${database.initial.file}")
     private String databaseInitialFile;
 
     public String getDatabaseDriverName() {
